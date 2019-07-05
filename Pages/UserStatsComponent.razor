@@ -1,0 +1,51 @@
+@using Data
+
+<div class="card shadow m-2 user-stats">
+    <div class="card-header bg-primary text-light pb-0">
+        <HeaderComponent Icon="oi-people" Title="User Statistics"></HeaderComponent>
+    </div>
+    <div class="card-body container-fluid">
+        <div class="row">
+            @if (UserHeatMaps == null)
+            {
+                <p class="col"><em>Loading...</em></p>
+            }
+            else
+            {
+                @foreach (var user in UserHeatMaps)
+                {
+                    <div class="card m-2">
+                        <div class="card-header">
+                            <div class="card-title m-0">@user.User</div>
+                        </div>
+                        <div class="card-body d-flex">
+                            <div class="row">
+                                <HeatMapComponent HeatPoints=@user.Points Tag=@user.User Max=@Max From=@From HeatMapSettings=@HeatMapSettings></HeatMapComponent>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+
+    [Parameter]
+    protected IEnumerable<UserHeatMap> UserHeatMaps { get; set; }
+
+    [Parameter]
+    protected DateTime From { get; set; }
+
+    [Parameter]
+    protected int Max { get; set; }
+
+    protected IDictionary<string, object> HeatMapSettings = new Dictionary<string, object>
+{
+        { "domain", "week" },
+        { "domainLabelFormat", string.Empty },
+        { "range", 5 }
+    };
+
+}

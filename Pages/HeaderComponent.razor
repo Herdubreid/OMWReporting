@@ -1,0 +1,23 @@
+<div class="header row">
+    <div class="col-auto">
+        <span class="oi @Icon"></span>
+    </div>
+    <div class="middle col">
+        <h4>@Title</h4>
+    </div>
+    <div class="right col-auto">
+        <button class="btn btn-sm btn-outline-warning">
+            <i class="oi oi-minus"></i>
+        </button>
+    </div>
+</div>
+
+@code {
+
+[Parameter]
+protected string Icon { get; set; }
+
+[Parameter]
+protected string Title { get; set; }
+
+}

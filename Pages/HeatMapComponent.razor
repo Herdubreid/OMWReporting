@@ -1,0 +1,44 @@
+@using Data
+@inject IJSRuntime IJSRuntime
+
+<div class="row justify-content-center">
+    @if (HeatPoints == null)
+    {
+        <p class="col"><em>Loading...</em></p>
+    }
+    else
+    {
+        <div id="@Tag" class="col cal-heatmap"></div>
+    }
+</div>
+
+@code {
+
+[Parameter]
+protected IDictionary<string, int> HeatPoints { get; set; }
+
+[Parameter]
+protected int Max { get; set; }
+
+[Parameter]
+protected DateTime From { get; set; }
+
+[Parameter]
+protected string Tag { get; set; }
+
+[Parameter]
+protected IDictionary<string, object> HeatMapSettings { get; set; }
+
+[JSInvokable]
+public static Task<int> CallFromJSAsync(string id, DateTime date, long count)
+{
+    return Task.FromResult(1);
+}
+
+protected override void OnAfterRender()
+{
+    IJSRuntime.InvokeAsync<object>("main.CalHeatmap", Tag, HeatPoints, From, Max, HeatMapSettings);
+    base.OnAfterRender();
+}
+
+}

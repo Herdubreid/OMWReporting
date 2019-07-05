@@ -1,0 +1,29 @@
+@page "/stats"
+@inherits BlazorStateComponent
+@using BlazorState
+@using Feature.OMWStats
+@inject IJSRuntime IJSRuntime
+
+<div class="container-fluid ml-2">
+    <div class="row">
+        <LogStatsComponent Title="Check-In Activity" Tag="checkIn" Icon="oi-check" LogHeatMap=@OMWState.CheckIns From=@OMWState.LogFrom></LogStatsComponent>
+        <LogStatsComponent Title="Status Change Activity" Tag="transfers" Icon="oi-transfer" LogHeatMap=@OMWState.Transfers From=@OMWState.LogFrom></LogStatsComponent>
+        <UserStatsComponent UserHeatMaps=@OMWState.Users From=@OMWState.UserFrom Max=@OMWState.UserMax></UserStatsComponent>
+    </div>
+</div>
+
+@code {
+
+    OMWState OMWState => GetState<OMWState>();
+
+    protected override Task OnInitAsync()
+    {
+        if (OMWState.Projects == null)
+        {
+            var since = DateTime.Now.AddMonths(-5);
+            Mediator.Send(new GetOMWStatsAction { From = new DateTime(since.Year, since.Month, 1) });
+        }
+        return base.OnInitAsync();
+    }
+
+}

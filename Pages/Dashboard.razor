@@ -1,0 +1,48 @@
+@page "/dashboard"
+@inherits BlazorStateComponent
+@using BlazorState
+@using Feature.UDC
+
+<h3>Dashboard</h3>
+
+@if (UdcState.Udcs == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Code</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var udc in UdcState.Udcs.fs_DATABROWSE_F0005.data.gridData.rowset)
+            {
+                <tr>
+                    <td>@udc.F0005_RT</td>
+                    <td>@udc.F0005_KY</td>
+                    <td>@udc.F0005_DL01</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+@code {
+
+UdcState UdcState => GetState<UdcState>();
+
+protected override Task OnInitAsync()
+{
+    if (UdcState.Udcs == null)
+    {
+        Mediator.Send(new GetUDCAction { SY = "H92", RT = new string[] { "PS", "AC" } });
+    }
+    return base.OnInitAsync();
+}
+
+}

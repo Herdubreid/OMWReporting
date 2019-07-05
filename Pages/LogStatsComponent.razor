@@ -1,0 +1,38 @@
+@using Data
+
+<div class="card shadow m-2">
+    <div class="card-header bg-primary text-light pb-0">
+        <HeaderComponent Icon=@Icon Title=@Title></HeaderComponent>
+    </div>
+    <div class="card-body">
+        <HeatMapComponent HeatPoints=@Points From=@From Max=@Max Tag=@Tag HeatMapSettings=@HeatMapSettings></HeatMapComponent>
+    </div>
+</div>
+
+@code {
+
+    [Parameter]
+    protected string Title { get; set; }
+
+    [Parameter]
+    protected string Icon { get; set; }
+
+    [Parameter]
+    protected LogHeatMap LogHeatMap { get; set; }
+
+    [Parameter]
+    protected DateTime From { get; set; }
+
+    [Parameter]
+    protected string Tag { get; set; }
+
+    protected IDictionary<string, int> Points { get { return LogHeatMap == null ? null : LogHeatMap.Points; } }
+    protected int Max { get { return LogHeatMap == null ? 40 : LogHeatMap.Max; } }
+
+    protected IDictionary<string, object> HeatMapSettings = new Dictionary<string, object>
+{
+        { "domain", "month" },
+        { "range", 6 }
+    };
+
+}
