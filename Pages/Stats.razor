@@ -9,6 +9,7 @@
         <LogStatsComponent Title="Check-In Activity" Tag="checkIn" Icon="oi-check" LogHeatMap=@OMWState.CheckIns From=@OMWState.LogFrom></LogStatsComponent>
         <LogStatsComponent Title="Status Change Activity" Tag="transfers" Icon="oi-transfer" LogHeatMap=@OMWState.Transfers From=@OMWState.LogFrom></LogStatsComponent>
         <UserStatsComponent UserHeatMaps=@OMWState.Users From=@OMWState.UserFrom Max=@OMWState.UserMax></UserStatsComponent>
+        <ProjectsComponent Projects=@OMWState.Projects LogHeatMap=@OMWState.ProjectsAdded From=@OMWState.LogFrom></ProjectsComponent>
     </div>
 </div>
 
@@ -18,7 +19,7 @@
 
     protected override Task OnInitAsync()
     {
-        if (OMWState.Projects == null)
+        if (OMWState.CheckIns == null)
         {
             var since = DateTime.Now.AddMonths(-5);
             Mediator.Send(new GetOMWStatsAction { From = new DateTime(since.Year, since.Month, 1) });

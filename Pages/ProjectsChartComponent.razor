@@ -1,0 +1,17 @@
+@using Data
+@inject IJSRuntime IJSRuntime
+
+<svg id="chart" class="col"></svg>
+
+@code {
+
+[Parameter]
+protected IEnumerable<Project> Projects { get; set; }
+
+protected override void OnAfterRender()
+{
+    IJSRuntime.InvokeAsync<object>("main.ProjectsChart", "chart", Projects);
+    base.OnAfterRender();
+}
+
+}

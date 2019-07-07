@@ -1,0 +1,48 @@
+@using Data
+
+<div class="card shadow m-2 proj-stats">
+    <div class="card-header bg-primary text-light pb-0">
+        <HeaderComponent Icon="oi-project" Title="Project Statistics"></HeaderComponent>
+    </div>
+    <div class="card-body">
+        @if (Projects == null)
+        {
+            <p><em>Loading...</em></p>
+        }
+        else
+        {
+            <div class="row">
+                <ProjectsChartComponent Projects=@Projects></ProjectsChartComponent>
+            </div>
+            <div class="row justify-content-center pb-2">
+                <div>Projects Added</div>
+            </div>
+            <div class="row justify-content-center">
+                <HeatMapComponent HeatPoints=@Points From=@From Max=@Max Tag="projectsAdded" HeatMapSettings=@HeatMapSettings></HeatMapComponent>
+            </div>
+        }
+    </div>
+</div>
+
+@code {
+
+    [Parameter]
+    protected IEnumerable<Project> Projects { get; set; }
+
+    [Parameter]
+    protected LogHeatMap LogHeatMap { get; set; }
+
+    [Parameter]
+    protected DateTime From { get; set; }
+
+    protected IDictionary<string, int> Points { get { return LogHeatMap == null ? null : LogHeatMap.Points; } }
+    protected int Max { get { return LogHeatMap == null ? 40 : LogHeatMap.Max; } }
+
+
+    protected IDictionary<string, object> HeatMapSettings = new Dictionary<string, object>
+{
+    { "domain", "month" },
+    { "range", 6 }
+};
+
+}

@@ -1,3 +1,4 @@
 import { CalHeatmap } from './CalHeatmapInterop';
-export { CalHeatmap };
+import { ProjectsChart } from './ProjectsChartInterop';
+export { CalHeatmap, ProjectsChart };
 //# sourceMappingURL=index.js.map

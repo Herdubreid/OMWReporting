@@ -38,3 +38,7 @@ html, body {
     float: left;
     min-width: 400px;
 }
+
+.proj-stats {
+    min-width: 800px;
+}

@@ -14,6 +14,7 @@ namespace OMWReporting.Feature.OMWStats
         public DateTime UserFrom { get; set; }
         public IEnumerable<UserHeatMap> Users { get; set; }
         public IEnumerable<Project> Projects { get; set; }
+        public LogHeatMap ProjectsAdded { get; set; }
         protected override void Initialize() { }
     }
 }

@@ -25,6 +25,7 @@ namespace OMWReporting.Data
     public class Project
     {
         public string Status { get; set; }
+        public string Name { get; set; }
         public int Count { get; set; }
     }
 
@@ -54,13 +55,23 @@ namespace OMWReporting.Data
             var user = new F98210DatabrowserRequest(FiveWeeksAgo);
             user.aggregation.groupBy.Add(new Celin.AIS.AggregationItem { column = "USER" });
 
+            var projects = new F98220DatabrowserRequest(
+                new string[] { "OMWPS" },
+                new string[][] { new string[] { "OMWPS", "ASC" } });
+            projects.query.condition.Add(F98220DatabrowserRequest.OMWPS);
+
+            var added = new F98220DatabrowserRequest(new string[] { "OMWCD" }, null);
+            added.query.condition.Add(F98220DatabrowserRequest.UPMJ(SixMonthsAgo));
+
             outputType = "GRID_DATA";
             batchDataRequest = true;
             dataRequests = new List<Celin.AIS.DatabrowserRequest>
             {
                 new F0005DatabrowserRequest("H92", new [] { "AC", "PS" }),
                 omwac,
-                user
+                user,
+                projects,
+                added
             };
         }
     }
@@ -70,5 +81,7 @@ namespace OMWReporting.Data
         public Celin.AIS.Form<Celin.AIS.FormData<F0005Row>> fs_0_DATABROWSE_F0005;
         public F98210Data ds_1_F98210 { get; set; }
         public F98210Data ds_2_F98210 { get; set; }
+        public F98220Data ds_3_F98220 { get; set; }
+        public F98220Data ds_4_F98220 { get; set; }
     }
 }

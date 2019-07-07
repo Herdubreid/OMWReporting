@@ -64,7 +64,7 @@ namespace OMWReporting.Data
                 {
                     new Celin.AIS.Value
                     {
-                        content = from.ToString("dd/MM/yyyy"),
+                        content = from.ToString("MM/dd/yyyy"),
                         specialValueId = "LITERAL"
                     }
                 },

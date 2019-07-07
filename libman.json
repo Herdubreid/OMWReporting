@@ -1,24 +1,11 @@
 {
   "version": "1.0",
   "defaultProvider": "cdnjs",
+  "defaultDestination": "wwwroot/lib/",
   "libraries": [
     {
-      "library": "d3@3.5.17",
+      "library": "d3@5.9.7",
       "destination": "wwwroot/lib/d3/"
-    },
-    {
-      "library": "cal-heatmap@3.6.2",
-      "destination": "wwwroot/lib/cal-heatmap/"
     }
-  ,
-{
-  "library": "jquery@3.4.1",
-  "destination": "wwwroot/lib/jquery/"
-}
-,
-{
-  "library": "require.js@2.3.6",
-  "destination": "wwwroot/lib/require.js/"
-}
-]
+  ]
 }

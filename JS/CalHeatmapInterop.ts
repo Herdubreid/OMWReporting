@@ -1,10 +1,6 @@
 ﻿/// <reference path="../node_modules/@types/cal-heatmap/index.d.ts" />
 /// <reference path="../node_modules/@types/jquery/index.d.ts" />
 
-declare class DotNet {
-    static invokeMethodAsync(...args);
-}
-
 export function CalHeatmap(id: string, points: any, from: any, max: number, init: any) {
     console.log('Draw: ', id, points, from, max, init);
     if ($(`#${id}`).children().length == 0 && points != undefined) {
